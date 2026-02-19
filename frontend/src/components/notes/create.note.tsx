@@ -65,53 +65,63 @@ const CreateNote: FC<ICreateNoteProps> = ({ setOpenNoteModal }) => {
   const onSubmitHandler: SubmitHandler<CreateNoteInput> = async (data) => {
     createNote(data);
   };
+
   return (
     <section>
-      <div className="flex justify-between items-center mb-3 pb-3 border-b border-gray-200">
-        <h2 className="text-2xl text-ct-dark-600 font-semibold">Create Note</h2>
+      <div className="flex justify-between items-center mb-5 pb-4 border-b border-glass-border">
+        <div className="flex items-center gap-3">
+          <div className="w-8 h-8 rounded-lg flex items-center justify-center"
+            style={{ background: 'rgba(168, 85, 247, 0.15)' }}
+          >
+            <i className="bx bx-plus text-ct-blue-600 text-lg"></i>
+          </div>
+          <h2 className="text-xl text-white font-semibold">Create Note</h2>
+        </div>
         <div
           onClick={() => setOpenNoteModal(false)}
-          className="text-2xl text-gray-400 hover:bg-gray-200 hover:text-gray-900 rounded-lg p-1.5 ml-auto inline-flex items-center cursor-pointer"
+          className="w-8 h-8 rounded-lg flex items-center justify-center text-[#6b6b85] hover:text-white hover:bg-glass-bg cursor-pointer transition-all duration-200"
         >
-          <i className="bx bx-x"></i>
+          <i className="bx bx-x text-xl"></i>
         </div>
       </div>
       <form className="w-full" onSubmit={handleSubmit(onSubmitHandler)}>
-        <div className="mb-2">
-          <label className="block text-gray-700 text-lg mb-2" htmlFor="title">
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-[#a0a0b8] mb-2" htmlFor="title">
             Title
           </label>
           <input
             className={twMerge(
-              `appearance-none border border-gray-400 rounded w-full py-3 px-3 text-gray-700 mb-2  leading-tight focus:outline-none`,
-              `${errors["title"] && "border-red-500"}`
+              `appearance-none border border-glass-border rounded-xl w-full py-3 px-4 text-white text-sm bg-[rgba(255,255,255,0.03)] leading-tight focus:outline-none focus:border-ct-blue-600 focus:ring-1 focus:ring-ct-blue-600 transition-all duration-200 placeholder-[#4a4a60]`,
+              `${errors["title"] && "border-red-500 focus:border-red-500 focus:ring-red-500"}`
             )}
+            placeholder="Enter note title..."
             {...methods.register("title")}
           />
           <p
             className={twMerge(
-              `text-red-500 text-xs italic mb-2 invisible`,
+              `text-red-400 text-xs mt-1.5 invisible`,
               `${errors["title"] && "visible"}`
             )}
           >
             {errors["title"]?.message as string}
           </p>
         </div>
-        <div className="mb-2">
-          <label className="block text-gray-700 text-lg mb-2" htmlFor="title">
+        <div className="mb-5">
+          <label className="block text-sm font-medium text-[#a0a0b8] mb-2" htmlFor="content">
             Content
           </label>
           <textarea
             className={twMerge(
-              `appearance-none border border-gray-400 rounded w-full py-3 px-3 text-gray-700 mb-2 leading-tight focus:outline-none`,
-              `${errors.content && "border-red-500"}`
+              `appearance-none border border-glass-border rounded-xl w-full py-3 px-4 text-white text-sm bg-[rgba(255,255,255,0.03)] leading-relaxed focus:outline-none focus:border-ct-blue-600 focus:ring-1 focus:ring-ct-blue-600 transition-all duration-200 resize-none placeholder-[#4a4a60]`,
+              `${errors.content && "border-red-500 focus:border-red-500 focus:ring-red-500"}`
             )}
             rows={6}
+            placeholder="Write your note content..."
             {...register("content")}
           />
           <p
             className={twMerge(
-              `text-red-500 text-xs italic mb-2`,
+              `text-red-400 text-xs mt-1.5`,
               `${errors.content ? "visible" : "invisible"}`
             )}
           >
